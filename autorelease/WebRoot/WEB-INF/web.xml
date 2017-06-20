@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 引入外部xml文件 -->
+<!DOCTYPE web-app[
+<!ENTITY common_web SYSTEM "classes/resource/common_web.xml">
+]>
+<web-app version="3.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	
+
+    <!-- 加载Spring容器配置，配置监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <!-- 设置Spring容器加载配置文件路径 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/resource/freemarker.xml</param-value>
+    </context-param>
+ 
+    <servlet>
+        <servlet-name>springServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+   <servlet-mapping>
+ 	  <servlet-name>springServlet</servlet-name>
+ 	  <url-pattern>/</url-pattern>
+   </servlet-mapping>
+  
+	<!-- 引入公共配置文件 -->
+	&common_web;
+	
+	<welcome-file-list>
+		<welcome-file>home.html</welcome-file>
+	</welcome-file-list>	
+    
+    <!-- 启用spring监听 -->
+<!--     <listener> -->
+<!--         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class> -->
+<!--     </listener> -->
+</web-app>
